@@ -102,7 +102,7 @@ public class project_1  {
     public static void display_result(double x, long y){
         df4.setRoundingMode(RoundingMode.UP);
         System.out.println("The evaluation result of Method 1: "+ df4.format(x) );
-        System.out.println("\nThe execution time in milliseconds: "+ y);
+        System.out.println("The execution time in milliseconds: "+ y);
 
     }
 
