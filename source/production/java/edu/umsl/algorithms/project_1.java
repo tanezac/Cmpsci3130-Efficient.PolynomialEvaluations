@@ -27,26 +27,53 @@ public class project_1  {
 
         do {
             int user_choice;
-            double result;
             user_choice = display_Menu();
+            String Method1_name = "The Straightforward method uses a for-loop";
+            String Method2_name = "The Straightforward method uses Power function";
+            String Method3_name = "The Horner’s Rule";
             switch (user_choice){
                 case 1:
+                    double result1;
                     long statTime1 = System.currentTimeMillis();
-                    result = Method1_Cal(x_value,myArray);
+                    result1 = Method1_Cal(x_value,myArray);
                     long stopTime1 =System.currentTimeMillis();
-                    display_result(result,stopTime1 - statTime1);
+                    display_result(result1,stopTime1 - statTime1,Method1_name);
                     break;
                 case 2:
+                    double result2;
                     long statTime2 = System.currentTimeMillis();
-                    result = Method2_Cal(x_value,myArray);
+                    result2 = Method2_Cal(x_value,myArray);
                     long stopTime2 =System.currentTimeMillis();
-                    display_result(result,stopTime2 - statTime2);
+                    display_result(result2,stopTime2 - statTime2, Method2_name);
                     break;
                 case 3:
+                    double result3;
+                    long statTime3 = System.currentTimeMillis();
+                    result3 = Method3_Cal(x_value,myArray);
+                    long stopTime3 =System.currentTimeMillis();
+                    display_result(result3,stopTime3 - statTime3, Method3_name);
                     break;
                 case 4:
+
+                    statTime1 = System.currentTimeMillis();
+                    result1 = Method1_Cal(x_value,myArray);
+                    stopTime1 =System.currentTimeMillis();
+                    display_result(result1,stopTime1 - statTime1, Method1_name);
+
+                    statTime2 = System.currentTimeMillis();
+                    result2 = Method2_Cal(x_value,myArray);
+                    stopTime2 =System.currentTimeMillis();
+                    display_result(result2,stopTime2 - statTime2, Method2_name);
+
+                    statTime3 = System.currentTimeMillis();
+                    result3 = Method3_Cal(x_value,myArray);
+                    stopTime3 =System.currentTimeMillis();
+                    display_result(result3,stopTime3 - statTime3, Method3_name);
+
                     break;
                 case 0:
+                    System.out.println("Bye!!");
+                    System.exit(0);
                     break;
                 default:
                     break;
@@ -99,17 +126,16 @@ public class project_1  {
         return choice;
     }
 
-    public static void display_result(double x, long y){
+    public static void display_result(double x, long y, String a){
         df4.setRoundingMode(RoundingMode.UP);
-        System.out.println("The evaluation result of Method 1: "+ df4.format(x) );
-        System.out.println("The execution time in milliseconds: "+ y);
+        System.out.println("\nThe evaluation result of Method " + a +  " : "+ df4.format(x) );
+        System.out.println("The execution time in milliseconds: "+ y+" milliseconds");
 
     }
 
     public static double Method1_Cal(double x, int[] array_polynomial){
         double array_result = 0;
         double coefficients;
-        double x_value = 1.0;
         for( int i = 0 ; i < array_polynomial.length; i++ ){
             coefficients = array_polynomial[i];
             for(int j = 0; j < i ; j++){
@@ -129,7 +155,13 @@ public class project_1  {
     }
 
     public static double Method3_Cal(double x, int [] array_polynomial){
-
+        double array_result =0;
+        double value;
+        value = array_polynomial[array_polynomial.length-1] ;
+        for(int i = array_polynomial.length - 1; i >0 ; i--){
+            value = value * x + array_polynomial[i-1];
+        }
+        return value;
     }
 
 
