@@ -7,14 +7,14 @@ import java.text.DecimalFormat;
 public class project_1  {
     private final static DecimalFormat df4 = new DecimalFormat("#.####");
     public static void main(String[] args) {
-        final int ARRAY_SIZE = 100000;
+        final int ARRAY_SIZE = 200000;
         int[] myArray = new int[ARRAY_SIZE];
         myArray = creatArray(ARRAY_SIZE);
         display_polynomial(myArray);
         Scanner input = new Scanner(System.in);
         char again;
         double x_value;
-        System.out.print("\nEnter the value of the variable x(between 0.0 and 1.0): ");
+        System.out.print("\nEnter the value of the variable x ( between 0.0 and 1.0 ): ");
         x_value = input.nextDouble();
         while (x_value < 0 || x_value > 1){
             System.out.println("Invalid number!! "+" You choice must be a double number from 0.0 to 1.0.");
@@ -32,13 +32,13 @@ public class project_1  {
             switch (user_choice){
                 case 1:
                     long statTime1 = System.currentTimeMillis();
-                    result = Method1_Cal(x_value,myArray1);
+                    result = Method1_Cal(x_value,myArray);
                     long stopTime1 =System.currentTimeMillis();
                     display_result(result,stopTime1 - statTime1);
                     break;
                 case 2:
                     long statTime2 = System.currentTimeMillis();
-                    result = Method2_Cal(x_value,myArray1);
+                    result = Method2_Cal(x_value,myArray);
                     long stopTime2 =System.currentTimeMillis();
                     display_result(result,stopTime2 - statTime2);
                     break;
@@ -108,12 +108,14 @@ public class project_1  {
 
     public static double Method1_Cal(double x, int[] array_polynomial){
         double array_result = 0;
-        double x_value = 1;
+        double coefficients;
+        double x_value = 1.0;
         for( int i = 0 ; i < array_polynomial.length; i++ ){
+            coefficients = array_polynomial[i];
             for(int j = 0; j < i ; j++){
-                x_value = x_value * x;
+                coefficients = coefficients * x;
             }
-            array_result += array_polynomial[i] * x_value;
+            array_result += coefficients;
         }
         return array_result;
     }
@@ -124,6 +126,10 @@ public class project_1  {
             array_result += array_polynomial[i]*Math.pow(x,i);
         }
         return array_result;
+    }
+
+    public static double Method3_Cal(double x, int [] array_polynomial){
+
     }
 
 
