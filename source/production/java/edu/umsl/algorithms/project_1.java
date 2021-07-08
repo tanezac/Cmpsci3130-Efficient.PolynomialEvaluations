@@ -1,7 +1,5 @@
 package edu.umsl.algorithms;
 
-import lombok.val;
-
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Scanner;
@@ -134,7 +132,8 @@ public class project_1  {
 
     }
     public static void display_Method3(double x, long y, String a){
-        val value = y / 1000000;
+        double value = (double) y / 1000000;
+        //long value1 = (long) y;
         df4.setRoundingMode(RoundingMode.UP);
         System.out.println("\nThe evaluation result of Method " + a +  " : "+ df4.format(x) );
         System.out.println("The execution time in nanoseconds: "+ y +" nanoseconds ( " + df4.format(value) +" milliseconds)." );
