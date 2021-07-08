@@ -1,14 +1,17 @@
 package edu.umsl.algorithms;
-import java.util.Scanner;
+
+import lombok.val;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 
 public class project_1  {
     private final static DecimalFormat df4 = new DecimalFormat("#.####");
     public static void main(String[] args) {
         final int ARRAY_SIZE = 200000;
-        int[] myArray = new int[ARRAY_SIZE];
+        int[] myArray;
         myArray = creatArray(ARRAY_SIZE);
         display_polynomial(myArray);
         Scanner input = new Scanner(System.in);
@@ -22,8 +25,6 @@ public class project_1  {
             x_value = input.nextDouble();
         }
 
-        int[] myArray1={1,2,3,4,5,6,7,8,9,10};
-
 
         do {
             int user_choice;
@@ -31,44 +32,47 @@ public class project_1  {
             String Method1_name = "The Straightforward method uses a for-loop";
             String Method2_name = "The Straightforward method uses Power function";
             String Method3_name = "The Horner’s Rule";
+            double result1;
+            double result2;
+            double result3;
             switch (user_choice){
                 case 1:
-                    double result1;
+
                     long statTime1 = System.currentTimeMillis();
                     result1 = Method1_Cal(x_value,myArray);
                     long stopTime1 =System.currentTimeMillis();
                     display_result(result1,stopTime1 - statTime1,Method1_name);
                     break;
                 case 2:
-                    double result2;
+
                     long statTime2 = System.currentTimeMillis();
                     result2 = Method2_Cal(x_value,myArray);
                     long stopTime2 =System.currentTimeMillis();
                     display_result(result2,stopTime2 - statTime2, Method2_name);
                     break;
                 case 3:
-                    double result3;
-                    long statTime3 = System.currentTimeMillis();
+
+                    long statTime3 = System.nanoTime();
                     result3 = Method3_Cal(x_value,myArray);
-                    long stopTime3 =System.currentTimeMillis();
-                    display_result(result3,stopTime3 - statTime3, Method3_name);
+                    long stopTime3 =System.nanoTime();
+                    display_Method3(result3,stopTime3 - statTime3, Method3_name);
                     break;
                 case 4:
 
-                    statTime1 = System.currentTimeMillis();
+                    long statTime11 = System.currentTimeMillis();
                     result1 = Method1_Cal(x_value,myArray);
-                    stopTime1 =System.currentTimeMillis();
-                    display_result(result1,stopTime1 - statTime1, Method1_name);
+                    long stopTime11 =System.currentTimeMillis();
+                    display_result(result1,stopTime11 - statTime11, Method1_name);
 
-                    statTime2 = System.currentTimeMillis();
+                    long statTime22 = System.currentTimeMillis();
                     result2 = Method2_Cal(x_value,myArray);
-                    stopTime2 =System.currentTimeMillis();
-                    display_result(result2,stopTime2 - statTime2, Method2_name);
+                    long stopTime22 =System.currentTimeMillis();
+                    display_result(result2,stopTime22 - statTime22, Method2_name);
 
-                    statTime3 = System.currentTimeMillis();
+                    long statTime33 = System.nanoTime();
                     result3 = Method3_Cal(x_value,myArray);
-                    stopTime3 =System.currentTimeMillis();
-                    display_result(result3,stopTime3 - statTime3, Method3_name);
+                    long stopTime33 =System.nanoTime();
+                    display_Method3(result3,stopTime33 - statTime33, Method3_name);
 
                     break;
                 case 0:
@@ -79,9 +83,6 @@ public class project_1  {
                     break;
 
             }
-
-
-
 
             System.out.println("\nDo you want to run the program again(Y/N): ");
             again = input.next().charAt(0);
@@ -129,9 +130,17 @@ public class project_1  {
     public static void display_result(double x, long y, String a){
         df4.setRoundingMode(RoundingMode.UP);
         System.out.println("\nThe evaluation result of Method " + a +  " : "+ df4.format(x) );
-        System.out.println("The execution time in milliseconds: "+ y+" milliseconds");
+        System.out.println("The execution time in milliseconds: "+ y +" milliseconds");
 
     }
+    public static void display_Method3(double x, long y, String a){
+        val value = y / 1000000;
+        df4.setRoundingMode(RoundingMode.UP);
+        System.out.println("\nThe evaluation result of Method " + a +  " : "+ df4.format(x) );
+        System.out.println("The execution time in nanoseconds: "+ y +" nanoseconds ( " + df4.format(value) +" milliseconds)." );
+
+    }
+
 
     public static double Method1_Cal(double x, int[] array_polynomial){
         double array_result = 0;
@@ -155,7 +164,6 @@ public class project_1  {
     }
 
     public static double Method3_Cal(double x, int [] array_polynomial){
-        double array_result =0;
         double value;
         value = array_polynomial[array_polynomial.length-1] ;
         for(int i = array_polynomial.length - 1; i >0 ; i--){
